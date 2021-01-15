@@ -92,7 +92,7 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 			setBounds(100, 100, 1150, 710);
 		}
 		setTitle("Buscaminas");
-		setResizable(false); 
+		setResizable(true); 
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		

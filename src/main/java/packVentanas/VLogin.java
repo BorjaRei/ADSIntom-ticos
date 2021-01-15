@@ -35,6 +35,7 @@ public class VLogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private Choice choice;
 	private JButton btnOk;
 	private JLabel lblNombre;
 	private Clip clip;
@@ -99,7 +100,7 @@ public class VLogin extends JFrame {
 		clip.start();
 		//SONIDO FIN
 		
-		setResizable(false);
+		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 410, 248);
 		contentPane = new JPanel(){
@@ -130,6 +131,17 @@ public class VLogin extends JFrame {
 			textField.setMaximumSize(new Dimension(200,50));
 		}
 		return textField;
+	}
+	private Choice getChoice() {
+		if (choice == null) {
+			choice = new Choice();
+			String arr [] = {"1","2","3"};
+			for(int i=0; i<arr.length; i++){
+				choice.add(arr[i]);
+			}
+		}
+		
+		return choice;
 	}
 	private JButton getBtnOk() {
 		if (btnOk == null) {

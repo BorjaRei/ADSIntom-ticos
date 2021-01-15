@@ -35,11 +35,13 @@ public class NuevoPass extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnOk;
+	private Choice choice;
 	private Clip clip;
 	private AudioInputStream ais;
 	private Image fondo;
 	private JLabel lblNewLabel;
 	private JTextField textField_1;
+	private JTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -134,12 +136,32 @@ public class NuevoPass extends JFrame {
 		}
 		return btnOk;
 	}
+	private Choice getChoice() {
+		if (choice == null) {
+			choice = new Choice();
+			String arr [] = {"1","2","3"};
+			for(int i=0; i<arr.length; i++){
+				choice.add(arr[i]);
+			}
+		}
+		
+		return choice;
+	}
+	private JTextField getTextField() {
+		if (textField == null) {
+			textField = new JTextField();
+			textField.setColumns(10);
+			textField.setMaximumSize(new Dimension(200,50));
+		}
+		return textField;
+	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("Nueva contrase\u00F1a:");
 		}
 		return lblNewLabel;
 	}
+
 	private JTextField getTextField_1() {
 		if (textField_1 == null) {
 			textField_1 = new JTextField();

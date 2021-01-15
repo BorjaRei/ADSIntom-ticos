@@ -35,6 +35,7 @@ public class VNombreyPassword extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private Choice choice;
 	private JButton btnOk;
 	private JLabel lblNombre;
 	private Clip clip;
@@ -120,6 +121,17 @@ public class VNombreyPassword extends JFrame {
 			textField.setMaximumSize(new Dimension(200,50));
 		}
 		return textField;
+	}
+	private Choice getChoice() {
+		if (choice == null) {
+			choice = new Choice();
+			String arr [] = {"1","2","3"};
+			for(int i=0; i<arr.length; i++){
+				choice.add(arr[i]);
+			}
+		}
+		
+		return choice;
 	}
 	private JButton getBtnOk() {
 		if (btnOk == null) {
