@@ -5,6 +5,8 @@ import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.json.JSONObject;
+
 import packVentanas.VBuscaminas;
 
 public class Buscaminas extends Observable implements Observer{
@@ -270,5 +272,7 @@ public class Buscaminas extends Observable implements Observer{
 		tablero.descubrirTodosLosVecinos(a,b);
 	}
 	
-
+	public JSONObject getInfoJugadores() {
+		return GestorBD.getInfoJugadores();
+	}
 }

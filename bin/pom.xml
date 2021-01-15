@@ -3,14 +3,4 @@
   <groupId>ADSI-buscaminas</groupId>
   <artifactId>ADSI-buscaminas</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-
-<!-- https://mvnrepository.com/artifact/org.json/json -->
-
-	<dependencies>
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>20140107</version>
-		</dependency>
-	</dependencies>
 </project>
