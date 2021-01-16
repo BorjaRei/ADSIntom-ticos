@@ -19,6 +19,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
@@ -36,12 +37,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 
 @SuppressWarnings({ "serial", "deprecation" })
 public class VBuscaminas extends JFrame implements ActionListener, Observer{
 
 	private JPanel contentPane;
+	private JPanel contentPane2;
 	private JMenuBar menuBar;
 	private JMenu menu1, menu2;
 	private JMenuItem item1, item2, item3;
@@ -300,8 +303,11 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 						   e.printStackTrace();
 					   }
 					   lblNewLabel.setIcon(new ImageIcon(VBuscaminas.class.getResource("/Perder.png")));
-					   JOptionPane.showMessageDialog(null, "OOOHHHHH QUE PENA, HAS ENCONTRADO UNA MINA!!!");
+					  JOptionPane.showMessageDialog(null, "OOOHHHHH QUE PENA, HAS ENCONTRADO UNA MINA!!!");
+					   VPublicar vL = new VPublicar();
+					   vL.setVisible(true);
 					   Ranking.getRanking().guardarLista();
+					   
 				   }
 				   else {
 					   juego = true;
@@ -328,6 +334,9 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 				   mostrarRanking();
 				   Ranking.getRanking().guardarLista();
 				   JOptionPane.showMessageDialog(null, "HAS RESUELTO CORRECTAMENTE!!!");
+				   VPublicar vL = new VPublicar();
+				   vL.setVisible(true);
+				   
 
 			   }
 			} else if(o instanceof Tablero){
@@ -425,7 +434,8 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 		}else{
 			if (new File("sources/win.wav").getAbsoluteFile() != null){
 				try {
-					ais = AudioSystem.getAudioInputStream(new File("sources/win.wav").getAbsoluteFile());
+					File music = new File(("src/main/resources/win.wav")).getAbsoluteFile();
+					ais = AudioSystem.getAudioInputStream(music);
 				} catch (UnsupportedAudioFileException e) {
 					e.printStackTrace();
 				} catch (IOException e) {

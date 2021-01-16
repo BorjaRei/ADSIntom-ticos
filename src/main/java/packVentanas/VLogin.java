@@ -1,6 +1,7 @@
 package packVentanas;
 
 import java.awt.EventQueue;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -166,3 +167,4 @@ public class VLogin extends JFrame {
 		return lblNivel;
 	}
 }
+

@@ -1,6 +1,7 @@
 package packVentanas;
 
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
