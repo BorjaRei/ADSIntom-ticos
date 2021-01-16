@@ -25,9 +25,8 @@ public class GestorRedesSociales {
 		RedSocial controller = new RedSocial();
         	//envia tweet
         	controller.publicarTweet(puntuacion, nombre ,puntuacionHistorica);
-        	//
-            List<Status> result = controller.query();;
-            controller.printStatus(result);
+        	//enseña ultimo tweet enviado
+        	controller.verUltimoTweet();
            
    		}
     }

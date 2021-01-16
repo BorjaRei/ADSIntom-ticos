@@ -223,7 +223,7 @@ public class Buscaminas extends Observable implements Observer{
 		puntuacion = pPunt;
 	}
 	
-	public String obtenerNombreJugador(){
+	public String obtenerNombreJugador() throws Exception{
 		return j.obtenerNombre();
 	}
 	

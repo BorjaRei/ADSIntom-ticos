@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
@@ -76,12 +77,13 @@ public class VPublicar extends JFrame {
 			btnOk.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e){
 					 if (e.getButton() == MouseEvent.BUTTON1) {
-						 ResultadoPartida t = new ResultadoPartida();
 							try {
+								ResultadoPartida t = new ResultadoPartida();
 								t.publicar();
-							} catch (TwitterException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+							} catch (TwitterException e1 ) {
+								 JOptionPane.showMessageDialog(null, "TWITTER NOS DA PROBLEMAS PARA PUBLICARLO, PRUEBA MAS TARDE!!");
+							}catch (Exception e2 ) {
+								 JOptionPane.showMessageDialog(null, "HEMOS TENIDO UN PROBLEMA PARA PUBLICARLO, PRUEBA DE NUEVO!!");
 							}
 						 setVisible(false);
 						 

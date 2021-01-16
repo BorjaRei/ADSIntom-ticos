@@ -12,17 +12,17 @@ public class ResultadoPartida {
 	private String premios[];
 	
 	
-	public ResultadoPartida(){
+	public ResultadoPartida() throws Exception{
 		this.nombreJugador =  Buscaminas.getBuscaminas().obtenerNombreJugador();
 	}
 	
 	public void setPuntuacionActual(){
 		this.puntuacion = GestorPuntuacion.getGestorPuntuacion().getPuntuacionActual();
 	}
-	public void setPuntuacionHistorica(){
+	public void setPuntuacionHistorica() throws NumberFormatException, Exception{
 		this.puntuacionHistorica = Integer.parseInt(GestorPuntuacion.getGestorPuntuacion().getPuntuacionMaxima());
 	}
-	public void publicar() throws TwitterException{
+	public void publicar() throws TwitterException {
 		GestorRedesSociales.getGestorPremios().publicar(puntuacion, nombreJugador, puntuacionHistorica);
 		
 	}

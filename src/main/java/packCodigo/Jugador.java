@@ -35,7 +35,7 @@ public class Jugador {
 	}
 	
 	//public para las JUnit
-	private boolean mismoJugador(){
+	private boolean mismoJugador() throws Exception{
 		boolean mismo = false;
 		if(this.obtenerNombre().equals(Buscaminas.getBuscaminas().obtenerNombreJugador())){
 			mismo = true;

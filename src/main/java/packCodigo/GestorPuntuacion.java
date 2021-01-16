@@ -16,7 +16,7 @@ public class GestorPuntuacion {
 	public int getPuntuacionActual(){
 		return Buscaminas.getBuscaminas().obtenerPuntuacion();
 	}
-	public String getPuntuacionMaxima(){
+	public String getPuntuacionMaxima() throws Exception{
 		SGBD BD=new SGBD();
 		String nombre = Buscaminas.getBuscaminas().obtenerNombreJugador();
 		ResultSet res=BD.execSQLC("SELECT puntos FROM Ranking WHERE nombreusuario='"+nombre+"'");
