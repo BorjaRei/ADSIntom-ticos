@@ -12,6 +12,7 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;    
 import javax.mail.internet.*;
+import packCodigo.SGBD;
 
 public class GestorJugadores {
 	private static GestorJugadores miGestorJugadores=new GestorJugadores();
@@ -28,7 +29,8 @@ public class GestorJugadores {
 	public boolean comprobarEmail(String email){
 		SGBD BD=new SGBD();
 		boolean existe=false;
-		ResultSet res=BD.execSQLC("SELECT correoJugador FROM Jugador WHERE correoJugador='"+email+"'");
+		String q=("SELECT correoJugador FROM Jugador WHERE correoJugador='"+email+"'");
+		ResultSet res=BD.execSQLC(q);
 		if (res!=null){
 			existe=true;
 		}
@@ -44,10 +46,10 @@ public class GestorJugadores {
 		return existe;
 	}
 	
-	public void registrarse(String nick, String pass, String email){
+	public void registrarse(String usuario, String pass, String email){
 		SGBD BD=new SGBD();
-		if(comprobarEmail(email)==false && comprobarUsuario(nick, pass)==false){
-			BD.execSQLI("INSERT INTO Jugador(correoJugador,nombreUsuario,contraseña) VALUES('"+email+"'"+nick+"'"+pass+"'"+")");
+		if(comprobarEmail(email)==false && comprobarUsuario(usuario, pass)==false){
+			BD.execSQLI("INSERT INTO Jugador(correoJugador,nombreUsuario,contraseña) VALUES('"+email+"'"+usuario+"'"+pass+"'"+")");
 		}
 	}
 	public void cambiarContra(String jugadorActual,String nueva){
@@ -63,7 +65,7 @@ public class GestorJugadores {
 		if ((pass==null) || (pass.equals(""))){
 			return false;
 		}
-		ResultSet res=BD.execSQL("SELECT nombreUsuario FROM Jugador WHERE nombreUsuario='"+usuario+"'"+"AND contraseña='"+pass+"'");
+		ResultSet res=BD.execSQLC("SELECT nombreUsuario FROM Jugador WHERE nombreUsuario='"+usuario+"'"+"AND contraseña='"+pass+"'");
 		try{
 			return res.next();
 			}
@@ -82,8 +84,9 @@ public class GestorJugadores {
 		    enviarConGMail(destinatario, asunto, cuerpo);
 		}
 	}
+	
 	private static void enviarConGMail(String destinatario, String asunto, String cuerpo) {
-	    
+	    //Sacado de https://bit.ly/3sudmHq
 	    String remitente = "adsintomaticos";  
 
 	    Properties props = System.getProperties();

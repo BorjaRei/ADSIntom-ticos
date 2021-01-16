@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import packCodigo.Buscaminas;
+import packCodigo.GestorJugadores;
 import packCodigo.NoArchivoAudioException;
 import packCodigo.Ranking;
 
@@ -30,6 +31,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
+import java.awt.Font;
+import java.awt.Color;
+
 
 public class VLogin extends JFrame {
 
@@ -42,12 +47,13 @@ public class VLogin extends JFrame {
 	private AudioInputStream ais;
 	private Image fondo;
 	private JLabel lblNewLabel;
-	private JTextField textField_1;
-	private JButton btnLoginRedesSociales;
 	private JLabel lblDireccinDeCorreo;
 	private JTextField textField_2;
 	private JButton btnRegistrarse;
 	private JButton btnRecuperarContrasea;
+	private JPasswordField passwordField;
+	private JLabel lblIntroducirUsuarioY;
+	private JLabel lblIntroducirTambinEmail;
 	
 	/**
 	 * Launch the application.
@@ -102,7 +108,7 @@ public class VLogin extends JFrame {
 		
 		setResizable(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 410, 248);
+		setBounds(100, 100, 609, 291);
 		contentPane = new JPanel(){
 			public void paintComponent(Graphics g){
 				g.drawImage(fondo,0,0,getWidth(),getHeight(),this);
@@ -110,17 +116,18 @@ public class VLogin extends JFrame {
 		};	
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[188.00,grow][][224.00,grow]", "[][20.00][20.00][20][50][50]"));
-		contentPane.add(getLblNombre(), "cell 0 0,alignx left");
-		contentPane.add(getTextField(), "cell 2 0,alignx center");
-		contentPane.add(getLblNewLabel(), "cell 0 1");
-		contentPane.add(getTextField_1(), "cell 2 1,alignx center");
-		contentPane.add(getBtnOk(), "cell 2 2,alignx center,aligny top");
-		contentPane.add(getBtnLoginRedesSociales(), "cell 2 3,alignx center");
-		contentPane.add(getLblDireccinDeCorreo(), "cell 0 4,aligny bottom");
-		contentPane.add(getTextField_2(), "cell 2 4,growx,aligny bottom");
-		contentPane.add(getBtnRegistrarse(), "flowx,cell 2 5,aligny top");
-		contentPane.add(getBtnRecuperarContrasea(), "cell 2 5,aligny top");
+		contentPane.setLayout(new MigLayout("", "[188.00,grow][][224.00,grow]", "[][][20.00][20.00][20][][50][50]"));
+		contentPane.add(getLblIntroducirUsuarioY(), "cell 0 0");
+		contentPane.add(getLblNombre(), "cell 0 1,alignx left");
+		contentPane.add(getTextField(), "cell 2 1,alignx center");
+		contentPane.add(getLblNewLabel(), "cell 0 2");
+		contentPane.add(getPasswordField(), "cell 2 2,alignx center");
+		contentPane.add(getBtnOk(), "cell 2 3,alignx center,aligny top");
+		contentPane.add(getLblIntroducirTambinEmail(), "cell 0 5");
+		contentPane.add(getLblDireccinDeCorreo(), "cell 0 6,aligny bottom");
+		contentPane.add(getTextField_2(), "cell 2 6,growx,aligny bottom");
+		contentPane.add(getBtnRegistrarse(), "flowx,cell 2 7,aligny top");
+		contentPane.add(getBtnRecuperarContrasea(), "cell 2 7,aligny top");
 		setTitle("Identificaci\u00F3n");
 	}
 
@@ -153,6 +160,12 @@ public class VLogin extends JFrame {
 			btnOk.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e){
 					 if (e.getButton() == MouseEvent.BUTTON1) {
+						 String usuario=textField.getText();
+						 String pass=passwordField.getText();
+						 boolean login=Buscaminas.getBuscaminas().login(usuario, pass);
+						 if (login){
+
+						 
 						 Ranking.getRanking().cargarLista();
 						 if(getTextField().getText().toString().equals("")){
 							 Buscaminas.getBuscaminas().establecerNombreJugador("Desconocido");
@@ -164,6 +177,7 @@ public class VLogin extends JFrame {
 						 setVisible(false);
 						 clip.stop();
 					 }
+					 }
 				}
 			});
 		}
@@ -172,6 +186,7 @@ public class VLogin extends JFrame {
 	private JLabel getLblNombre() {
 		if (lblNombre == null) {
 			lblNombre = new JLabel("Nombre de usuario:");
+			lblNombre.setForeground(Color.WHITE);
 			
 		}
 		return lblNombre;
@@ -179,25 +194,14 @@ public class VLogin extends JFrame {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("Contrase\u00F1a:");
+			lblNewLabel.setForeground(Color.WHITE);
 		}
 		return lblNewLabel;
-	}
-	private JTextField getTextField_1() {
-		if (textField_1 == null) {
-			textField_1 = new JTextField();
-			textField_1.setColumns(10);
-		}
-		return textField_1;
-	}
-	private JButton getBtnLoginRedesSociales() {
-		if (btnLoginRedesSociales == null) {
-			btnLoginRedesSociales = new JButton("Login redes sociales");
-		}
-		return btnLoginRedesSociales;
 	}
 	private JLabel getLblDireccinDeCorreo() {
 		if (lblDireccinDeCorreo == null) {
 			lblDireccinDeCorreo = new JLabel("Direcci\u00F3n de correo electr\u00F3nico:");
+			lblDireccinDeCorreo.setForeground(Color.WHITE);
 		}
 		return lblDireccinDeCorreo;
 	}
@@ -211,13 +215,63 @@ public class VLogin extends JFrame {
 	private JButton getBtnRegistrarse() {
 		if (btnRegistrarse == null) {
 			btnRegistrarse = new JButton("Registrarse");
+			btnRegistrarse.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){}
+			});
+			btnRegistrarse.addMouseListener(new MouseAdapter(){
+				public void mouseClicked(MouseEvent e){
+					if (e.getButton()==MouseEvent.BUTTON1){
+						String usuario=textField.getText();
+						String pass=passwordField.getText();
+						String email=textField_2.getText();
+						Buscaminas.getBuscaminas().registrarse(usuario, pass, email);
+					}
+				}
+			});
 		}
+
 		return btnRegistrarse;
 	}
 	private JButton getBtnRecuperarContrasea() {
 		if (btnRecuperarContrasea == null) {
 			btnRecuperarContrasea = new JButton("Recuperar contrase\u00F1a");
+			btnRecuperarContrasea.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent arg0){}
+			});
+			btnRecuperarContrasea.addMouseListener(new MouseAdapter(){
+					public void mouseClicked(MouseEvent e){
+						if (e.getButton()==MouseEvent.BUTTON1){
+							String email=textField_2.getText();
+							Buscaminas.getBuscaminas().recuperarContra(email);
+						}
+					}
+			});
 		}
+					
 		return btnRecuperarContrasea;
+	}
+	
+	private JPasswordField getPasswordField() {
+		if (passwordField == null) {
+			passwordField = new JPasswordField();
+			passwordField.setColumns(10);
+		}
+		return passwordField;
+	}
+	private JLabel getLblIntroducirUsuarioY() {
+		if (lblIntroducirUsuarioY == null) {
+			lblIntroducirUsuarioY = new JLabel("Introducir usuario y contrase\u00F1a para iniciar sesi\u00F3n");
+			lblIntroducirUsuarioY.setForeground(Color.WHITE);
+			lblIntroducirUsuarioY.setFont(new Font("Tahoma", Font.BOLD, 11));
+		}
+		return lblIntroducirUsuarioY;
+	}
+	private JLabel getLblIntroducirTambinEmail() {
+		if (lblIntroducirTambinEmail == null) {
+			lblIntroducirTambinEmail = new JLabel("Introducir tambi\u00E9n email para registrarse");
+			lblIntroducirTambinEmail.setForeground(Color.WHITE);
+			lblIntroducirTambinEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
+		}
+		return lblIntroducirTambinEmail;
 	}
 }

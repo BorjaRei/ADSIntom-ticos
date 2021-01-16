@@ -269,6 +269,19 @@ public class Buscaminas extends Observable implements Observer{
 	public void descubrirTodosLosVecinos(int a, int b) {
 		tablero.descubrirTodosLosVecinos(a,b);
 	}
+	public boolean login(String usuario, String pass){
+		return(GestorJugadores.getMiGestorJugadores().login(usuario, pass));
+	}
+	public void registrarse(String usuario, String pass, String email){
+		GestorJugadores.getMiGestorJugadores().registrarse(usuario, pass, email);
+	}
+	public void cambiarContra(String usuario, String pass){
+		GestorJugadores.getMiGestorJugadores().cambiarContra(usuario, pass);
+	}
+	public void recuperarContra(String email){
+		GestorJugadores.getMiGestorJugadores().recuperarContra(email);
+	}
+	
 	
 
 }
