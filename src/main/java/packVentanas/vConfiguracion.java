@@ -137,17 +137,17 @@ public class vConfiguracion extends JFrame {
 				FormSpecs.DEFAULT_ROWSPEC,}));
 		
 		//Hacer llamada a BD para coger configuracion actual
-		//JSONObject js=gestorBD.getMigestorBD().getConfig("Prueba");
+		JSONObject js=Buscaminas.getBuscaminas().getInfo();
 	
 		//Insertar los botones y labels 
 		//SE PASA LA CONFIGURACION ACTUAL COMO PARAMETRO PARA PRESELECCIONARLO
-		/*inciarMinas(js.getInt("Mina"));
+		inciarMinas(js.getInt("Mina"));
 		iniciarSonidos(js.getInt("Sonido"));
 		iniciarIcono(js.getString("Icono"));
-		*/
-		inciarMinas(1);
+		
+		/*inciarMinas(1);
 		iniciarSonidos(1);
-		iniciarIcono("OA");
+		iniciarIcono("OA");*/
 		
 		guardarCambios = new JButton("Guardar Cambios");
 		contentPane.add(guardarCambios, "8, 22, 13, 1");

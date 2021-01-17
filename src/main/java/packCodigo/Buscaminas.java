@@ -5,6 +5,8 @@ import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.json.JSONObject;
+
 import packVentanas.VBuscaminas;
 
 
@@ -253,9 +255,7 @@ public class Buscaminas extends Observable implements Observer{
 		}
 	}
 
-	public int getSonido() {
-		return 2;
-	}
+	
 	public void calcularPuntos() {
 		if(!finalizado){
 			puntuacion = 0;
@@ -276,8 +276,18 @@ public class Buscaminas extends Observable implements Observer{
 	}
 	
 	public void guardarConf( int pMina, int pSonido, String pIcono) {
-		System.out.print("EWEW");
+		//System.out.print("EWEW");
 		GestorJugadores.getMiGestorJugadores().guardarConf(this.j.obtenerNombre(), pMina, pSonido, pIcono);
+	}
+	public int getSonido() {
+		
+		return GestorJugadores.getMiGestorJugadores().getSonido(j.obtenerNombre()) ;
+	}
+	public int getMina() {
+		return GestorJugadores.getMiGestorJugadores().getMina(j.obtenerNombre());
+	}
+	public JSONObject getInfo() {
+		return GestorJugadores.getMiGestorJugadores().getInfo(j.obtenerNombre());
 	}
 
 }

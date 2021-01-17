@@ -13,6 +13,8 @@ import javax.activation.FileDataSource;
 import javax.mail.*;    
 import javax.mail.internet.*;
 
+import org.json.JSONObject;
+
 import net.ucanaccess.jdbc.Session;
 import packCodigo.SGBD;
 import vista.gestorBD;
@@ -120,8 +122,31 @@ public class GestorJugadores {
 	
 	public void guardarConf(String pNombreJugador, int pMina, int pSonido, String pIcono) {
 
-		String insSQL="UPDATE jugador SET pathIconoMinas="+pMina+" , pathSonido="+ pSonido +" ,pathIconoJugador="+pIcono+" WHERE nombreUsuario="+ pNombreJugador;
+		String insSQL="UPDATE jugador SET pathIconoMinas="+pMina+" , pathSonido="+ pSonido +" ,pathIconoUsuario="+pIcono+" WHERE nombreUsuario="+ pNombreJugador;
 		System.out.println(insSQL);
 		//SGBD.getMigestorBD().execSQL(insSQL);
+	}
+	
+	public JSONObject getInfo(String usuario) {
+		String insSQL="SELECT pathIconoMina, pathSonido, pathIconoUsuario FROM Jugador WHERE nombre='"+usuario+"'";
+		//CAMBIAR CON BD
+		JSONObject jo=new JSONObject();
+		jo.put("Mina", 3);
+		jo.put("Sonido", 2);
+		jo.put("Icono", "PATH");
+		
+		return jo;
+	
+	}
+	public int getSonido(String usuario) {
+		//Cogemos la configuracion de sonido del usuario
+		String insSQL="SELECT pathSonido FROM Jugador WHERE nombre='"+usuario+"'";
+		
+		return 1;
+	}
+	public int getMina(String usuario) {
+		//Cogemos la configuracion de mina del usuario
+		String insSQL="SELECT pathIconoMina FROM Jugador WHERE nombre='"+usuario+"'";
+		return 1;
 	}
 }
