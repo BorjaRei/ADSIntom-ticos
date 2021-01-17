@@ -1,56 +1,75 @@
 package packCodigo;
+import java.sql.*;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SGBD {
-	
-	 // Librería de MySQL
-   public String driver = "com.mysql.cj.jdbc.Driver";
-//   com.mysql.jdbc.Driver
-   // Nombre de la base de datos
-   public String database = "buscaminas";
-   // Host
-   public String hostname = "localhost";
-   // Puerto
-   public String port = "3306";
-   // Ruta de la base de datos (desactivamos el uso de SSL con "?useSSL=false")
-   public String url = "jdbc:mysql://" + hostname + ":" + port + "/" + database + "?useSSL=false";
-   // Nombre de usuario
-   public String username = "root";
-   // Clave de usuario
-   public String password = "";
-   // Conexion
-  
-   public Connection conectarMySQL() { //Realiza la conexion
-       Connection conn = null;
-       try {
-           Class.forName(driver);
-           conn = DriverManager.getConnection(url, username, password);
-       } catch (ClassNotFoundException | SQLException e) {
-           e.printStackTrace();
-       }
-       return conn;
-   }
-   public void execSQLI(String actualiz) {
-   	Connection con= this.conectarMySQL();
-   	try {
-			con.prepareStatement(actualiz).executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-   }
-   public ResultSet execSQLC(String pregunta) {
-   	Connection con= this.conectarMySQL();
-   	try {
-			return con.createStatement().executeQuery(pregunta);
-		} catch (SQLException e) {
-			return null;
-		}
-   
-   }
-   
 
-}
+		public ResultSet execSQLC(String q) {
+			 // Se mete todo en un try por los posibles errores de MySQL
+			 ResultSet rs = null;
+	        try
+	        {
+	            // Se registra el Driver de MySQL
+	            DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
+	            
+	            // Se obtiene una conexión con la base de datos. Hay que
+	            // cambiar el usuario "root" y la clave "la_clave" por las
+	            // adecuadas a la base de datos que estemos usando.
+	            Connection conexion = DriverManager.getConnection (
+	                "jdbc:mysql://localhost/buscaminas","root", "");
+	            
+	            // Se crea un Statement, para realizar la consulta
+	            java.sql.Statement s = conexion.createStatement();
+	            
+	            // Se realiza la consulta. Los resultados se guardan en el 
+	            // ResultSet rs
+	             rs = s.executeQuery(q);
+	            
+	            // Se cierra la conexión con la base de datos.
+	            
+	        }
+	        catch (Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+			return rs;
+		}
+		public void  execSQLU(String q) {
+			 // Se mete todo en un try por los posibles errores de MySQL
+			 ResultSet rs = null;
+	        try
+	        {
+	            // Se registra el Driver de MySQL
+	            DriverManager.registerDriver(new org.gjt.mm.mysql.Driver());
+	            
+	            // Se obtiene una conexión con la base de datos. Hay que
+	            // cambiar el usuario "root" y la clave "la_clave" por las
+	            // adecuadas a la base de datos que estemos usando.
+	            Connection conexion = DriverManager.getConnection (
+	                "jdbc:mysql://localhost/buscaminas","root", "");
+	            
+	            // Se crea un Statement, para realizar la consulta
+	            java.sql.Statement s = conexion.createStatement();
+	            
+	            // Se realiza la consulta. Los resultados se guardan en el 
+	            // ResultSet rs
+	             s.execute(q);
+	            
+	            
+	            // Se cierra la conexión con la base de datos.
+	            conexion.close();
+	        }
+	        catch (Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+			
+		}
+	    
+	}
+	   

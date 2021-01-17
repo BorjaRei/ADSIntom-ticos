@@ -29,6 +29,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -164,8 +166,7 @@ public class VLogin extends JFrame {
 						 String pass=passwordField.getText();
 						 boolean login=Buscaminas.getBuscaminas().login(usuario, pass);
 						 if (login){
-
-						 
+							 JOptionPane.showMessageDialog(null, "Login CORRECTO!!");
 						 Ranking.getRanking().cargarLista();
 						 if(getTextField().getText().toString().equals("")){
 							 Buscaminas.getBuscaminas().establecerNombreJugador("Desconocido");
@@ -177,6 +178,9 @@ public class VLogin extends JFrame {
 						 setVisible(false);
 						 clip.stop();
 					 }
+						 else{
+							 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO!!");
+						 }
 					 }
 				}
 			});
@@ -224,7 +228,23 @@ public class VLogin extends JFrame {
 						String usuario=textField.getText();
 						String pass=passwordField.getText();
 						String email=textField_2.getText();
-						Buscaminas.getBuscaminas().registrarse(usuario, pass, email);
+						boolean correcto = Buscaminas.getBuscaminas().registrarse(usuario, pass, email);
+						if (correcto == true){
+							JOptionPane.showMessageDialog(null, "REGISTRO CORRECTO!!");
+							Ranking.getRanking().cargarLista();
+							 if(getTextField().getText().toString().equals("")){
+								 Buscaminas.getBuscaminas().establecerNombreJugador("Desconocido");
+							 }else{
+								 Buscaminas.getBuscaminas().establecerNombreJugador(getTextField().getText());
+							 }
+							 VBuscaminas vB = new VBuscaminas(Integer.parseInt(getChoice().getSelectedItem()));
+							 vB.setVisible(true);
+							 setVisible(false);
+							 clip.stop();
+						}else{
+							JOptionPane.showMessageDialog(null, "REGISTRO INCORRECTO , RELLENA BIEN LOS CAMPOS!!");
+						}
+						
 					}
 				}
 			});

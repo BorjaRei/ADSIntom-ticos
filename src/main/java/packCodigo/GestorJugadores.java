@@ -1,4 +1,5 @@
 package packCodigo;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -26,46 +27,63 @@ public class GestorJugadores {
 		return miGestorJugadores;
 	}
 	
-	public boolean comprobarEmail(String email){
+	public boolean comprobarEmail(String email){ //comprueba si el email ya está en la BD
+		boolean existe = false;
 		SGBD BD=new SGBD();
-		boolean existe=false;
-		String q=("SELECT correoJugador FROM Jugador WHERE correoJugador='"+email+"'");
+		String q=("SELECT correo FROM jugador WHERE correo='"+email+"'");
 		ResultSet res=BD.execSQLC(q);
-		if (res!=null){
-			existe=true;
+	
+		try {
+			if (res.next()!=false){
+				existe=true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		return existe;
 	}
-	public boolean comprobarUsuario (String nick, String pass){
+	public boolean comprobarUsuario (String nick, String pass){ //Comprueba si el usuario ya está en la BD
 		SGBD BD=new SGBD();
 		boolean existe=false;
-		ResultSet res=BD.execSQLC("SELECT nombreUsuario FRROM Jugador WHERE nombreUsuario='"+nick+"'");
-		if (res!=null){
-			existe=true;
+		ResultSet res=BD.execSQLC("SELECT nombre FROM jugador WHERE nombre='"+nick+"'");
+		try {
+			if (res.next()!=false){
+				existe=true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+
 		return existe;
 	}
 	
-	public void registrarse(String usuario, String pass, String email){
+	public boolean registrarse(String usuario, String pass, String email){
 		SGBD BD=new SGBD();
-		if(comprobarEmail(email)==false && comprobarUsuario(usuario, pass)==false){
-			BD.execSQLI("INSERT INTO Jugador(correoJugador,nombreUsuario,contraseña) VALUES('"+email+"'"+usuario+"'"+pass+"'"+")");
+		boolean correcto = false;
+		if(comprobarEmail(email)==false && comprobarUsuario(usuario, pass)==false){ //Si el nombre y el email no están ya registrados en la BD
+			BD.execSQLU("INSERT INTO jugador(correo,nombre,password) VALUES('"+email+"','"+usuario+"','"+pass+"'"+")");
+			correcto = true;
 		}
+		return correcto;
 	}
 	public void cambiarContra(String jugadorActual,String nueva){
 		SGBD BD=new SGBD();
-		BD.execSQLI("UPDATE Jugador SET contraseña='"+nueva+"'"+"WHERE nombreUsuario='"+jugadorActual+"'");
+		BD.execSQLC("UPDATE jugador SET password='"+nueva+"'"+"WHERE nombre='"+jugadorActual+"'");
 		
 	}
 	public boolean login(String usuario, String pass){
 		SGBD BD=new SGBD();
-		if((usuario==null) || (usuario.equals(""))){
+		if((usuario==null) || (usuario.equals(""))){ //Comprueba que los campos no estén vacíos
 			return false;
 		}
-		if ((pass==null) || (pass.equals(""))){
+		if ((pass==null) || (pass.equals(""))){ //Comprueba que los campos no estén vacíos
 			return false;
 		}
-		ResultSet res=BD.execSQLC("SELECT nombreUsuario FROM Jugador WHERE nombreUsuario='"+usuario+"'"+"AND contraseña='"+pass+"'");
+		ResultSet res=BD.execSQLC("SELECT nombre FROM Jugador WHERE nombre='"+usuario+"'"+"AND password='"+pass+"'");
 		try{
 			return res.next();
 			}
@@ -76,11 +94,22 @@ public class GestorJugadores {
 	public void recuperarContra(String email){
 		SGBD BD=new SGBD();
 		if (comprobarEmail(email)==true){
-			ResultSet res=BD.execSQLC("SELECT contraseña FROM Jugador WHERE correoJugador='"+email+"'");
+			
+			ResultSet res=BD.execSQLC("SELECT password FROM jugador WHERE correo='"+email+"'");
+			String pass="";
+			try {
+				res.next();
+				pass = res.getString("password") ;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+          
+            
 		    String destinatario =  email; //A quien le quieres escribir.
 		    String asunto = "Recuperación de contraseña";
-		    String cuerpo = "Su contraseña es: " + res;
-
+		    String cuerpo = "Su contraseña es: " + pass;
+            
 		    enviarConGMail(destinatario, asunto, cuerpo);
 		}
 	}
@@ -96,7 +125,7 @@ public class GestorJugadores {
 	    props.put("mail.smtp.auth", "true");    //Usar autenticación mediante usuario y clave
 	    props.put("mail.smtp.starttls.enable", "true"); //Para conectar de manera segura al servidor SMTP
 	    props.put("mail.smtp.port", "587"); //El puerto SMTP seguro de Google
-
+	    
 	    Session session = Session.getDefaultInstance(props);
 	    MimeMessage message = new MimeMessage(session);
 
@@ -115,4 +144,3 @@ public class GestorJugadores {
 	    }
 	}
 }
-
