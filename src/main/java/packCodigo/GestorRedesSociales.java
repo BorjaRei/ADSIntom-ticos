@@ -22,11 +22,13 @@ public class GestorRedesSociales {
 	
     
 	public void publicar() throws Exception{ 
-		RedSocial controller = new RedSocial();
+		//Pre : Partida Acabada y datos necesarios guardados.
+    	//Pos : Datos leidos y enviados al metodo publicar de la clase RedSocial mediante parametro.
+			RedSocial controller = new RedSocial();
         	//envia tweet
-			int puntuacion = GestorPuntuacion.getGestorPuntuacion().getPuntuacionActual();
-			String nombre = Buscaminas.getBuscaminas().obtenerNombreJugador();
-			int puntuacionHistorica = GestorPuntuacion.getGestorPuntuacion().getPuntuacionMaxima();
+			int puntuacion = GestorPuntuacion.getGestorPuntuacion().getPuntuacionActual(); //OBTIENE PUNTUACION ACTUAL
+			String nombre = Buscaminas.getBuscaminas().obtenerNombreJugador(); // OBTIENE NOMBRE DEL JUGADOR ACTUAL
+			int puntuacionHistorica = GestorPuntuacion.getGestorPuntuacion().getPuntuacionMaxima(); // OBTENER PUNTUACION MAXIMA DE LA BASE DE DATOS
         	
 			controller.publicarTweet(puntuacion, nombre ,puntuacionHistorica);
         	//enseña ultimo tweet enviado
