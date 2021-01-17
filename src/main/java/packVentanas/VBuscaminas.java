@@ -373,6 +373,10 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
         }else if (e.getSource() == item3){
         	mostrarRanking();
         }
+        else if(e.getSource()==item4) {
+        	VConfig vc=new VConfig();
+        	vc.setVisible(true);
+        }
    }
 	
 	private void habilitarCasillas(){

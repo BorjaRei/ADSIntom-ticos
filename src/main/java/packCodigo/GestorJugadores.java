@@ -133,6 +133,6 @@ public class GestorJugadores {
 	}
 	public void guardarConf(String pNombreJugador, int pMina, int pSonido, String pIcono) {
 
-		SGBD.getMiSGBD().execSQLC("UPDATE jugador SET pathIconoMinas="+pMina+" , pathSonido="+ pSonido +" ,pathIconoJugador="+pIcono+" WHERE nombreUsuario="+ pNombreJugador);		
+		SGBD.getMiSGBD().execSQLU("UPDATE jugador SET pathIconoMina="+pMina+" , pathSonido="+ pSonido +" ,pathIconoUsuario='"+pIcono+"' WHERE nombre='"+ pNombreJugador+"'");		
 	}
 }
