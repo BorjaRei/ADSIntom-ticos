@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import packVentanas.VBuscaminas;
 
+
 public class Buscaminas extends Observable implements Observer{
 
 	private static Buscaminas miBuscaminas = new Buscaminas();
@@ -19,7 +20,8 @@ public class Buscaminas extends Observable implements Observer{
 	private int contBanderas=0;
 	private int puntuacion;
 	private boolean finalizado = false;
-	private Jugador j;
+	private Jugador j=new Jugador("Borka");
+
 	
 	/****************
 	 * CONSTRUCTORA	*
@@ -270,5 +272,9 @@ public class Buscaminas extends Observable implements Observer{
 		tablero.descubrirTodosLosVecinos(a,b);
 	}
 	
+	public void guardarConf( int pMina, int pSonido, String pIcono) {
+		System.out.print("EWEW");
+		GestorJugadores.getMiGestorJugadores().guardarConf(this.j.obtenerNombre(), pMina, pSonido, pIcono);
+	}
 
 }
