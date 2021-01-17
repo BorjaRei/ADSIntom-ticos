@@ -253,6 +253,9 @@ public class Buscaminas extends Observable implements Observer{
 		}
 	}
 
+	public int getSonido() {
+		return 2;
+	}
 	public void calcularPuntos() {
 		if(!finalizado){
 			puntuacion = 0;

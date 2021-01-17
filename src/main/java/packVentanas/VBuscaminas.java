@@ -43,8 +43,8 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 
 	private JPanel contentPane;
 	private JMenuBar menuBar;
-	private JMenu menu1, menu2;
-	private JMenuItem item1, item2, item3;
+	private JMenu menu1, menu2, menu3;
+	private JMenuItem item1, item2, item3, item4;
 	private JPanel panel_2;
 	private JLabel lblNewLabel;
 	private JLabel[] Banderas = new JLabel[3];
@@ -102,6 +102,8 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 		menu2 = new JMenu("Ayuda");
 		menuBar.add(menu2);
 		
+		
+		
 		item1 = new JMenuItem("Nuevo");
 		item1.addActionListener(this);
 		menu1.add(item1);
@@ -114,6 +116,11 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 		item3 = new JMenuItem("Ranking");
 		item3.addActionListener(this);
 		menu1.add(item3);
+		
+		item4= new JMenuItem("Configuracion");
+		item4.addActionListener(this);
+		menu1.add(item4);
+		
 		
 		
 		contentPane = new JPanel();
@@ -342,7 +349,8 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 				    		 lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/CasillaPrimeraMina.png")));
 				    		 bomba++;
 				    	} else {
-				    		 lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/CasillaMina.png")));	  
+				    		
+				    		 lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/mina3.png")));	  
 				    	}
 				    }else if(Integer.parseInt(p[2])==11){
 				    	lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/CasillaNoMina.png")));
@@ -360,6 +368,11 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 			vA.setVisible(true);
         }else if (e.getSource() == item3){
         	mostrarRanking();
+        }
+        else if(e.getSource()==item4) {
+        	
+        	vConfiguracion vc=new vConfiguracion();
+        	vc.setVisible(true);
         }
    }
 	
@@ -398,10 +411,11 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 	}
 	
 	private void play(boolean pB) throws NoArchivoAudioException{
+		int sonido=Buscaminas.getBuscaminas().getSonido();
 		if (pB==false){
-			if (new File("sources/lose.wav").getAbsoluteFile() != null){
+			if (new File("sources/sonido"+sonido+".wav").getAbsoluteFile() != null){
 				try {
-					ais = AudioSystem.getAudioInputStream(new File("src/main/resources/lose.wav").getAbsoluteFile());
+					ais = AudioSystem.getAudioInputStream(new File("src/main/resources/sonido"+sonido+".wav").getAbsoluteFile());
 				} catch (UnsupportedAudioFileException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
