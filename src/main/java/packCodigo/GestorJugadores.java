@@ -99,7 +99,7 @@ public class GestorJugadores {
 			String pass="";
 			try {
 				res.next();
-				pass = res.getString("password") ;
+				pass = res.getString("password") ; //Recogemos el campo "password" de la BD
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
