@@ -112,8 +112,4 @@ public class pruebasConfiguracion {
 		
 	}
 	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/BorjaRei/ADSIntom-ticos.git
