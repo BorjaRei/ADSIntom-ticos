@@ -24,15 +24,5 @@ public class GestorPuntuacion {
 		int puntos = res.getInt(1);
 		return puntos;
 	}
-	  public static void main(String[] args) 
-	    {
-	        GestorPuntuacion k = new GestorPuntuacion();
-	        try {
-				k.getPuntuacionMaxima();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        
-	    }
+	
 }
