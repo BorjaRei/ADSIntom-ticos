@@ -16,12 +16,23 @@ public class GestorPuntuacion {
 	public int getPuntuacionActual(){
 		return Buscaminas.getBuscaminas().obtenerPuntuacion();
 	}
-	public String getPuntuacionMaxima() throws Exception{
+	public int getPuntuacionMaxima() throws Exception{
 		SGBD BD=new SGBD();
 		String nombre = Buscaminas.getBuscaminas().obtenerNombreJugador();
-		ResultSet res=BD.execSQLC("SELECT puntos FROM Ranking WHERE nombreusuario='"+nombre+"'");
+		ResultSet res=BD.execSQLC("SELECT puntos FROM ranking WHERE nombre='"+nombre+"'");
 		res.next();
-		String puntos = res.getString(1);
+		int puntos = res.getInt(1);
 		return puntos;
 	}
+	  public static void main(String[] args) 
+	    {
+	        GestorPuntuacion k = new GestorPuntuacion();
+	        try {
+				k.getPuntuacionMaxima();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+	    }
 }

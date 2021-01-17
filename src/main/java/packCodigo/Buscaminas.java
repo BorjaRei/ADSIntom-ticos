@@ -230,10 +230,10 @@ public class Buscaminas extends Observable implements Observer{
 		this.puntuacion = GestorPuntuacion.getGestorPuntuacion().getPuntuacionActual();
 	}
 	public void setPuntuacionHistorica() throws NumberFormatException, Exception{
-		this.puntuacionHistorica = Integer.parseInt(GestorPuntuacion.getGestorPuntuacion().getPuntuacionMaxima());
+		this.puntuacionHistorica = GestorPuntuacion.getGestorPuntuacion().getPuntuacionMaxima();
 	}
 	public void publicar() throws Exception {
-		GestorRedesSociales.getGestorPremios().publicar(puntuacion, this.obtenerNombreJugador(), puntuacionHistorica);
+		GestorRedesSociales.getGestorRedesSociales().publicar();
 	}
 	public String obtenerNombreJugador() throws Exception{
 		return j.obtenerNombre();

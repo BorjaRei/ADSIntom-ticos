@@ -65,14 +65,14 @@ public class GestorJugadores {
 		SGBD BD=new SGBD();
 		boolean correcto = false;
 		if(comprobarEmail(email)==false && comprobarUsuario(usuario, pass)==false){
-			BD.execSQLU("INSERT INTO jugador(correo,nombre,contraseña) VALUES('"+email+"','"+usuario+"','"+pass+"'"+")");
+			BD.execSQLU("INSERT INTO jugador(correo,nombre,password) VALUES('"+email+"','"+usuario+"','"+pass+"'"+")");
 			correcto = true;
 		}
 		return correcto;
 	}
 	public void cambiarContra(String jugadorActual,String nueva){
 		SGBD BD=new SGBD();
-		BD.execSQLC("UPDATE jugador SET contraseña='"+nueva+"'"+"WHERE nombre='"+jugadorActual+"'");
+		BD.execSQLC("UPDATE jugador SET password='"+nueva+"'"+"WHERE nombre='"+jugadorActual+"'");
 		
 	}
 	public boolean login(String usuario, String pass){
@@ -83,7 +83,7 @@ public class GestorJugadores {
 		if ((pass==null) || (pass.equals(""))){
 			return false;
 		}
-		ResultSet res=BD.execSQLC("SELECT nombre FROM Jugador WHERE nombre='"+usuario+"'"+"AND contraseña='"+pass+"'");
+		ResultSet res=BD.execSQLC("SELECT nombre FROM Jugador WHERE nombre='"+usuario+"'"+"AND password='"+pass+"'");
 		try{
 			return res.next();
 			}

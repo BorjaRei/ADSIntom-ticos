@@ -16,15 +16,19 @@ public class GestorRedesSociales {
 	private GestorRedesSociales(){
 	}
 	
-	public static GestorRedesSociales getGestorPremios(){
+	public static GestorRedesSociales getGestorRedesSociales(){
 		return miGestorRedesSociales;
 	}
 	
     
-	public void publicar(int puntuacion , String nombre ,int puntuacionHistorica) throws TwitterException{ 
+	public void publicar() throws Exception{ 
 		RedSocial controller = new RedSocial();
         	//envia tweet
-        	controller.publicarTweet(puntuacion, nombre ,puntuacionHistorica);
+			int puntuacion = GestorPuntuacion.getGestorPuntuacion().getPuntuacionActual();
+			String nombre = Buscaminas.getBuscaminas().obtenerNombreJugador();
+			int puntuacionHistorica = GestorPuntuacion.getGestorPuntuacion().getPuntuacionMaxima();
+        	
+			controller.publicarTweet(puntuacion, nombre ,puntuacionHistorica);
         	//enseña ultimo tweet enviado
         	controller.verUltimoTweet();
            
