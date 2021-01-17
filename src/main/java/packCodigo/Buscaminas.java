@@ -272,8 +272,9 @@ public class Buscaminas extends Observable implements Observer{
 	public boolean login(String usuario, String pass){
 		return(GestorJugadores.getMiGestorJugadores().login(usuario, pass));
 	}
-	public void registrarse(String usuario, String pass, String email){
-		GestorJugadores.getMiGestorJugadores().registrarse(usuario, pass, email);
+	public boolean registrarse(String usuario, String pass, String email){
+		boolean correcto = GestorJugadores.getMiGestorJugadores().registrarse(usuario, pass, email);
+		return correcto;
 	}
 	public void cambiarContra(String usuario, String pass){
 		GestorJugadores.getMiGestorJugadores().cambiarContra(usuario, pass);
