@@ -353,7 +353,7 @@ private class ControladorGuardar implements ActionListener{
 		}
 		
 		pIcono=textField.getText();
-		
+		vConfiguracion.this.disable();
 		Buscaminas.getBuscaminas().guardarConf( pMina, pSonido, pIcono);
 		
 	}
