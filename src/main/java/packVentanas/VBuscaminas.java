@@ -354,7 +354,8 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 				    		 lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/CasillaPrimeraMina.png")));
 				    		 bomba++;
 				    	} else {
-				    		 lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/CasillaMina.png")));	  
+				    		 int mina=Buscaminas.getBuscaminas().getMina();
+				    		 lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/mina"+mina+".png")));  
 				    	}
 				    }else if(Integer.parseInt(p[2])==11){
 				    	lcasillas[pos].setIcon(new ImageIcon(VBuscaminas.class.getResource("/CasillaNoMina.png")));

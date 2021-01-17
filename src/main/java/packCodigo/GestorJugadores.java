@@ -13,6 +13,9 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.*;    
 import javax.mail.internet.*;
+
+import org.json.JSONObject;
+
 import packCodigo.SGBD;
 
 public class GestorJugadores {
@@ -134,5 +137,60 @@ public class GestorJugadores {
 	public void guardarConf(String pNombreJugador, int pMina, int pSonido, String pIcono) {
 
 		SGBD.getMiSGBD().execSQLU("UPDATE jugador SET pathIconoMina="+pMina+" , pathSonido="+ pSonido +" ,pathIconoUsuario='"+pIcono+"' WHERE nombre='"+ pNombreJugador+"'");		
+	}
+	public JSONObject getInfo(String usuario) {
+		//CAMBIAR CON BD
+		int IconoMina = 1;
+		int Sonido = 1;
+		String Usuario = null;
+		ResultSet res = SGBD.getMiSGBD().execSQLC("SELECT pathIconoMina, pathSonido, pathIconoUsuario FROM jugador WHERE nombre='"+usuario+"'");
+		try {
+			while (res.next())
+            {
+            IconoMina =  res.getInt(1);
+            Sonido=  res.getInt(2);
+            Usuario= res.getString(3);
+            }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		JSONObject jo=new JSONObject();
+		jo.put("Mina", IconoMina);
+		jo.put("Sonido", Sonido);
+		jo.put("Icono", Usuario);
+		
+		return jo;
+	
+	}
+	public int getSonido(String usuario) {
+		//Cogemos la configuracion de sonido del usuario
+		ResultSet res = SGBD.getMiSGBD().execSQLC("SELECT pathSonido FROM jugador WHERE nombre='"+usuario+"'");
+		int result = 1;
+		try {
+			res.next();
+			result = res.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+	public int getMina(String usuario) {
+		ResultSet res = SGBD.getMiSGBD().execSQLC("SELECT pathIconoMina FROM jugador WHERE nombre='"+usuario+"'");
+		int result = 1;
+		try {
+			res.next();
+			result = res.getInt(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return result;
 	}
 }

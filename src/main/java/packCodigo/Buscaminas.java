@@ -5,6 +5,8 @@ import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.json.JSONObject;
+
 import packVentanas.VBuscaminas;
 import twitter4j.TwitterException;
 
@@ -298,8 +300,15 @@ public class Buscaminas extends Observable implements Observer{
 		System.out.print("EWEW");
 		GestorJugadores.getMiGestorJugadores().guardarConf(this.j.obtenerNombre(), pMina, pSonido, pIcono);
 	}
+	
 	public int getSonido() {
-		return 2;
+		return GestorJugadores.getMiGestorJugadores().getSonido(j.obtenerNombre()) ;
+	}
+	public int getMina() {
+		return GestorJugadores.getMiGestorJugadores().getMina(j.obtenerNombre());
+	}
+	public JSONObject getInfo() {
+		return GestorJugadores.getMiGestorJugadores().getInfo(j.obtenerNombre());
 	}
 
 
