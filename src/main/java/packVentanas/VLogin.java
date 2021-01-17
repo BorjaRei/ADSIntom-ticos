@@ -152,7 +152,7 @@ public class VLogin extends JFrame {
 		
 		return choice;
 	}
-	private JButton getBtnOk() {
+	private JButton getBtnOk() { //Botón Login
 		if (btnOk == null) {
 			btnOk = new JButton("Login");
 			btnOk.addActionListener(new ActionListener() {
@@ -162,9 +162,9 @@ public class VLogin extends JFrame {
 			btnOk.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e){
 					 if (e.getButton() == MouseEvent.BUTTON1) {
-						 String usuario=textField.getText();
-						 String pass=passwordField.getText();
-						 boolean login=Buscaminas.getBuscaminas().login(usuario, pass);
+						 String usuario=textField.getText(); //Recogemos el nombre de usuario que se ha introducido
+						 String pass=passwordField.getText(); //Recogemos la contraseña que se ha introducido
+						 boolean login=Buscaminas.getBuscaminas().login(usuario, pass); //Si el login es correcto
 						 if (login){
 							 JOptionPane.showMessageDialog(null, "Login CORRECTO!!");
 						 Ranking.getRanking().cargarLista();
@@ -179,7 +179,7 @@ public class VLogin extends JFrame {
 						 clip.stop();
 					 }
 						 else{
-							 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASE�A INCORRECTO!!");
+							 JOptionPane.showMessageDialog(null, "USUARIO O CONTRASEÑA INCORRECTO!!");
 						 }
 					 }
 				}
@@ -225,10 +225,10 @@ public class VLogin extends JFrame {
 			btnRegistrarse.addMouseListener(new MouseAdapter(){
 				public void mouseClicked(MouseEvent e){
 					if (e.getButton()==MouseEvent.BUTTON1){
-						String usuario=textField.getText();
-						String pass=passwordField.getText();
-						String email=textField_2.getText();
-						boolean correcto = Buscaminas.getBuscaminas().registrarse(usuario, pass, email);
+						String usuario=textField.getText(); //Recogemos el nombre de usuario que se ha introducido
+						String pass=passwordField.getText(); //Recogemos la contraseña que se ha introducido
+						String email=textField_2.getText(); //Recogemos el email que se ha introducido
+						boolean correcto = Buscaminas.getBuscaminas().registrarse(usuario, pass, email); //Comprueba si el registro es correcto
 						if (correcto == true){
 							JOptionPane.showMessageDialog(null, "REGISTRO CORRECTO!!");
 							Ranking.getRanking().cargarLista();
@@ -242,7 +242,7 @@ public class VLogin extends JFrame {
 							 setVisible(false);
 							 clip.stop();
 						}else{
-							JOptionPane.showMessageDialog(null, "REGISTRO INCORRECTO , RELLEBA BIEN LOS CAMPOS!!");
+							JOptionPane.showMessageDialog(null, "REGISTRO INCORRECTO , RELLENA BIEN LOS CAMPOS!!");
 						}
 						
 					}
@@ -261,9 +261,9 @@ public class VLogin extends JFrame {
 			btnRecuperarContrasea.addMouseListener(new MouseAdapter(){
 					public void mouseClicked(MouseEvent e){
 						if (e.getButton()==MouseEvent.BUTTON1){
-							String email=textField_2.getText();
-							Buscaminas.getBuscaminas().recuperarContra(email);
-							JOptionPane.showMessageDialog(null, "Si estas registrado el Correo se ha ENVIADO !!");
+							String email=textField_2.getText(); //Recogemos el email que se ha introducido
+							Buscaminas.getBuscaminas().recuperarContra(email); //comprueba si el email ya está registrado, si está envía mail de recuperación
+							JOptionPane.showMessageDialog(null, "Si estás registrado el correo se ha ENVIADO !!");
 						}
 					}
 			});
@@ -281,7 +281,7 @@ public class VLogin extends JFrame {
 	}
 	private JLabel getLblIntroducirUsuarioY() {
 		if (lblIntroducirUsuarioY == null) {
-			lblIntroducirUsuarioY = new JLabel("Introducir usuario y contrase\u00F1a para iniciar sesi\u00F3n");
+			lblIntroducirUsuarioY = new JLabel("Introducir usuario y contrase\u00F1a para iniciar sesi\u00F3n o para registarte");
 			lblIntroducirUsuarioY.setForeground(Color.WHITE);
 			lblIntroducirUsuarioY.setFont(new Font("Tahoma", Font.BOLD, 11));
 		}
@@ -289,7 +289,7 @@ public class VLogin extends JFrame {
 	}
 	private JLabel getLblIntroducirTambinEmail() {
 		if (lblIntroducirTambinEmail == null) {
-			lblIntroducirTambinEmail = new JLabel("Introducir tambi\u00E9n email para registrarse");
+			lblIntroducirTambinEmail = new JLabel("Introducir tambi\u00E9n email para registrarte");
 			lblIntroducirTambinEmail.setForeground(Color.WHITE);
 			lblIntroducirTambinEmail.setFont(new Font("Tahoma", Font.BOLD, 11));
 		}
