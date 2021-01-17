@@ -8,7 +8,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SGBD {
-
+	
+	private static SGBD miSGBD = new SGBD();
+	private SGBD (){}
+	
+	public static SGBD  getMiSGBD (){
+		if (miSGBD ==null){
+			miSGBD =new SGBD ();
+		}
+		return miSGBD ;
+	}
+	
 		public ResultSet execSQLC(String q) {
 			 // Se mete todo en un try por los posibles errores de MySQL
 			 ResultSet rs = null;

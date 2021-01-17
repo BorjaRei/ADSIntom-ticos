@@ -29,7 +29,24 @@
     <artifactId>mysql-connector-java</artifactId>
     <version>3.1.14</version>
 </dependency>
-  </dependencies>
+ <dependency>
+	    <groupId>com.miglayout</groupId>
+	    <artifactId>miglayout</artifactId>
+	    <version>3.7.4</version>
+	</dependency>
+	
+	<dependency>
+  	 <groupId>com.jgoodies</groupId>
+    <artifactId>jgoodies-forms</artifactId>
+    <version>1.8.0</version>
+  	</dependency>
+	<dependency>
+    	<groupId>org.json</groupId>
+    	<artifactId>json</artifactId>
+    	<version>20140107</version>
+	</dependency>
+
+ </dependencies>
   
   <build>
     <plugins>

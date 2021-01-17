@@ -44,10 +44,9 @@ import java.awt.Image;
 public class VBuscaminas extends JFrame implements ActionListener, Observer{
 
 	private JPanel contentPane;
-	private JPanel contentPane2;
 	private JMenuBar menuBar;
 	private JMenu menu1, menu2;
-	private JMenuItem item1, item2, item3;
+	private JMenuItem item1, item2, item3 ,item4;
 	private JPanel panel_2;
 	private JLabel lblNewLabel;
 	private JLabel[] Banderas = new JLabel[3];
@@ -117,6 +116,10 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 		item3 = new JMenuItem("Ranking");
 		item3.addActionListener(this);
 		menu1.add(item3);
+		item4= new JMenuItem("Configuracion");
+		item4.addActionListener(this);
+		menu1.add(item4);
+		
 		
 		
 		contentPane = new JPanel();
@@ -407,10 +410,11 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 	}
 	
 	private void play(boolean pB) throws NoArchivoAudioException{
+		int sonido=Buscaminas.getBuscaminas().getSonido();
 		if (pB==false){
-			if (new File("sources/lose.wav").getAbsoluteFile() != null){
+			if (new File("sources/sonido"+sonido+".wav").getAbsoluteFile() != null){
 				try {
-					ais = AudioSystem.getAudioInputStream(new File("src/main/resources/lose.wav").getAbsoluteFile());
+					ais = AudioSystem.getAudioInputStream(new File("src/main/resources/sonido"+sonido+".wav").getAbsoluteFile());
 				} catch (UnsupportedAudioFileException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -434,8 +438,7 @@ public class VBuscaminas extends JFrame implements ActionListener, Observer{
 		}else{
 			if (new File("sources/win.wav").getAbsoluteFile() != null){
 				try {
-					File music = new File(("src/main/resources/win.wav")).getAbsoluteFile();
-					ais = AudioSystem.getAudioInputStream(music);
+					ais = AudioSystem.getAudioInputStream(new File("sources/win.wav").getAbsoluteFile());
 				} catch (UnsupportedAudioFileException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
