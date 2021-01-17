@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import packVentanas.VBuscaminas;
+import twitter4j.TwitterException;
 
 public class Buscaminas extends Observable implements Observer{
 
@@ -20,6 +21,7 @@ public class Buscaminas extends Observable implements Observer{
 	private int puntuacion;
 	private boolean finalizado = false;
 	private Jugador j;
+	private int puntuacionHistorica;
 	
 	/****************
 	 * CONSTRUCTORA	*
@@ -222,7 +224,17 @@ public class Buscaminas extends Observable implements Observer{
 	private void establecerPuntuacion(int pPunt){
 		puntuacion = pPunt;
 	}
+
 	
+	public void setPuntuacionActual(){
+		this.puntuacion = GestorPuntuacion.getGestorPuntuacion().getPuntuacionActual();
+	}
+	public void setPuntuacionHistorica() throws NumberFormatException, Exception{
+		this.puntuacionHistorica = Integer.parseInt(GestorPuntuacion.getGestorPuntuacion().getPuntuacionMaxima());
+	}
+	public void publicar() throws Exception {
+		GestorRedesSociales.getGestorPremios().publicar(puntuacion, this.obtenerNombreJugador(), puntuacionHistorica);
+	}
 	public String obtenerNombreJugador() throws Exception{
 		return j.obtenerNombre();
 	}
@@ -269,6 +281,18 @@ public class Buscaminas extends Observable implements Observer{
 	public void descubrirTodosLosVecinos(int a, int b) {
 		tablero.descubrirTodosLosVecinos(a,b);
 	}
-	
+	public boolean login(String usuario, String pass){
+		return(GestorJugadores.getMiGestorJugadores().login(usuario, pass));
+	}
+	public boolean registrarse(String usuario, String pass, String email){
+		boolean correcto = GestorJugadores.getMiGestorJugadores().registrarse(usuario, pass, email);
+		return correcto;
+	}
+	public void cambiarContra(String usuario, String pass){
+		GestorJugadores.getMiGestorJugadores().cambiarContra(usuario, pass);
+	}
+	public void recuperarContra(String email){
+		GestorJugadores.getMiGestorJugadores().recuperarContra(email);
+	}
 
 }

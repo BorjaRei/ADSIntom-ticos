@@ -3,6 +3,7 @@ package packVentanas;
 import java.awt.EventQueue;
 
 
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
@@ -14,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
+import packCodigo.Buscaminas;
 import packCodigo.NoArchivoAudioException;
-import packCodigo.ResultadoPartida;
 import twitter4j.TwitterException;
 
 import javax.swing.ImageIcon;
@@ -78,8 +79,8 @@ public class VPublicar extends JFrame {
 				public void mouseClicked(MouseEvent e){
 					 if (e.getButton() == MouseEvent.BUTTON1) {
 							try {
-								ResultadoPartida t = new ResultadoPartida();
-								t.publicar();
+								
+								Buscaminas.getBuscaminas().publicar();
 							} catch (TwitterException e1 ) {
 								 JOptionPane.showMessageDialog(null, "TWITTER NOS DA PROBLEMAS PARA PUBLICARLO, PRUEBA MAS TARDE!!");
 							}catch (Exception e2 ) {

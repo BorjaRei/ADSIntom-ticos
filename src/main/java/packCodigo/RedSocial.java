@@ -26,7 +26,8 @@ public class RedSocial {
 	
   
     public void publicarTweet (int puntuacion ,String usuario ,int puntuacionHistorica) throws TwitterException {
-    	twitter.updateStatus("Holaaaa ! " + usuario + " has conseguido " + puntuacion + " puntos. Tu puntuacion historica es : " + puntuacionHistorica );
+    	twitter.updateStatus("Holaaaa ! " + usuario + " has conseguido " + puntuacion + " puntos. Tu puntuacion historica es : " 
+    			+ puntuacionHistorica );
     }
     //PRUEBA PARA VER LO QUE PUBLICA *
     public void verUltimoTweet() throws TwitterException {

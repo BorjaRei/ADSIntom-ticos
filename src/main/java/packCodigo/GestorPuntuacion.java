@@ -20,6 +20,8 @@ public class GestorPuntuacion {
 		SGBD BD=new SGBD();
 		String nombre = Buscaminas.getBuscaminas().obtenerNombreJugador();
 		ResultSet res=BD.execSQLC("SELECT puntos FROM Ranking WHERE nombreusuario='"+nombre+"'");
-		return res.toString();
+		res.next();
+		String puntos = res.getString(1);
+		return puntos;
 	}
 }
