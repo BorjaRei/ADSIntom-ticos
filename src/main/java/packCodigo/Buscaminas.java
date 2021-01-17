@@ -297,7 +297,6 @@ public class Buscaminas extends Observable implements Observer{
 		GestorJugadores.getMiGestorJugadores().recuperarContra(email);
 	}
 	public void guardarConf( int pMina, int pSonido, String pIcono) {
-		System.out.print("EWEW");
 		GestorJugadores.getMiGestorJugadores().guardarConf(this.j.obtenerNombre(), pMina, pSonido, pIcono);
 	}
 	

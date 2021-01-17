@@ -95,12 +95,22 @@ public class GestorJugadores {
 	}
 	public void recuperarContra(String email){
 		
-		if (comprobarEmail(email)==true){
-			ResultSet res=SGBD.getMiSGBD().execSQLC("SELECT contraseña FROM jugador WHERE correo='"+email+"'");
+if (comprobarEmail(email)==true){
+			
+			ResultSet res=SGBD.getMiSGBD().execSQLC("SELECT password FROM jugador WHERE correo='"+email+"'");
+			String pass="";
+			try {
+				res.next();
+				pass = res.getString("password") ; //Recogemos el campo "password" de la BD
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+           
 		    String destinatario =  email; //A quien le quieres escribir.
 		    String asunto = "Recuperación de contraseña";
-		    String cuerpo = "Su contraseña es: " + res;
-
+		    String cuerpo = "Su contraseña es: " + pass;
+            
 		    enviarConGMail(destinatario, asunto, cuerpo);
 		}
 	}

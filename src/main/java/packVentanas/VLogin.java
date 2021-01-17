@@ -263,6 +263,7 @@ public class VLogin extends JFrame {
 						if (e.getButton()==MouseEvent.BUTTON1){
 							String email=textField_2.getText();
 							Buscaminas.getBuscaminas().recuperarContra(email);
+							JOptionPane.showMessageDialog(null, "Si estas registrado el Correo se ha ENVIADO !!");
 						}
 					}
 			});
